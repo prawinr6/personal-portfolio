@@ -61,16 +61,18 @@ h2{letter-spacing:-.04em}
 .theme-switch [data-slot="switch-thumb"][data-state="checked"]{translate:24px 0}
 .theme-switch:focus-visible{outline:2px solid var(--primary);outline-offset:5px}
 
-/* Equal-size contact links; the copy action stays beside the email at every width. */
-.contact-bar{--contact-link-size:clamp(1.25rem,2.7vw,2.4rem);display:flex;width:max-content;max-width:100%;flex-direction:column;align-items:flex-start;justify-content:center;gap:22px;margin-inline:auto}
-.contact-email-row{display:flex;align-items:center;flex-wrap:nowrap;gap:12px;max-width:100%}
-.email-link,.linkedin-link{display:inline-flex;align-items:center;gap:16px;max-width:100%;font-size:var(--contact-link-size);font-weight:400;line-height:1.5;letter-spacing:-.03em;color:var(--foreground);border:0;transition:color .2s}
-.email-link>span,.linkedin-link>span:last-child{border-bottom:1px solid var(--link-line)}
+/* Explicit rows keep contact links stable during scrolling, hover and resizing. */
+.contact-bar{--contact-link-size:clamp(1.25rem,2.7vw,2.4rem);display:grid;grid-template-columns:minmax(0,1fr);width:fit-content;max-width:100%;align-items:center;justify-items:start;gap:22px;margin-inline:auto}
+.contact-email-row{display:flex;align-items:center;flex-wrap:nowrap;gap:12px;min-width:0;max-width:100%}
+.email-link,.linkedin-link{display:inline-flex;align-items:center;gap:16px;min-width:0;max-width:100%;font-size:var(--contact-link-size);font-weight:400;line-height:1.5;letter-spacing:-.03em;color:var(--foreground);border:0;transition:color .2s}
+.contact-link-label{display:block;min-width:0;border-bottom:1px solid var(--link-line)}
+.email-link .contact-link-label{overflow-wrap:anywhere}
+.linkedin-link{width:max-content;justify-self:start;flex-shrink:0;white-space:nowrap}
 .email-link:hover,.linkedin-link:hover{color:var(--primary)}
-.email-link:hover>span,.linkedin-link:hover>span:last-child{border-color:var(--primary)}
+.email-link:hover .contact-link-label,.linkedin-link:hover .contact-link-label{border-color:var(--primary)}
 .email-symbol{width:29px;height:29px;color:var(--primary);flex-shrink:0}
-.linkedin-symbol{width:29px;height:29px;display:inline-grid;place-items:center;flex-shrink:0;background:var(--primary);border-radius:4px}
-.linkedin-symbol img{width:17px;height:17px}
+.linkedin-symbol{width:29px;height:29px;display:inline-grid;place-items:center;flex-shrink:0;line-height:1;background:var(--primary);border-radius:4px}
+.linkedin-symbol img{display:block;width:17px;height:17px}
 [data-theme="light"] .linkedin-symbol img{filter:brightness(0) invert(1)}
 .contact-email-row .copy-button{width:44px!important;height:44px!important;min-width:44px;flex-shrink:0;margin:0;padding:0!important;border-radius:50%!important;display:inline-flex;align-items:center;justify-content:center;background:var(--accent-faint)!important;color:var(--text-secondary)!important;border-color:var(--accent-border)!important}
 .contact-email-row .copy-button:hover{background:var(--accent-wash)!important;color:var(--primary)!important;transform:translateY(-1px)}

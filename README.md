@@ -70,14 +70,14 @@ The preview automatically detects the prefix from the exported HTML and prints h
 - `next.config.ts`: enables static export, directory-style URLs, and a configurable build prefix.
 - `package.json`: makes development and build commands use Next.js; production preview serves static files.
 - `.github/workflows/deploy-pages.yml`: builds and deploys the static output.
-- `lib/asset-path.ts`, `app/page.tsx` and `app/layout.tsx`: prefix the existing portrait, LinkedIn icon and favicon URLs for repository hosting.
-- `app/globals.css`: only the six local font URL references changed, allowing the bundler to emit fonts with the correct hosting prefix. All visual declarations and responsive rules are preserved.
+- `lib/asset-path.ts`, `app/page.tsx` and `app/layout.tsx`: prefix the existing portrait, LinkedIn icon and favicon URLs for repository hosting. The contact links also have explicit text-label classes and are always visible instead of participating in the scroll-reveal animation.
+- `app/globals.css`: font URL references support static hosting. The contact block uses explicit grid rows, a non-wrapping LinkedIn label and a fixed-size icon; its spacing, typography and responsive sizes are preserved.
 - `public/.nojekyll`: preserves underscore-prefixed static assets when the output is used with a file-based host.
 - `scripts/preview.mjs`: previews the built website at its actual base path.
 - `tsconfig.json`: scopes Next.js type checking to application sources.
 - `pnpm-workspace.yaml` and `.gitignore`: keep the dependency store and build caches local and out of the repository.
 
-UI components, font binaries, portrait, logos, text, section order, alignment, colours, breakpoint rules and interactions have not been redesigned. Dependency versions and the original dependency lockfile are preserved.
+UI components, font binaries, portrait, logos, text, section order, alignment, colours and breakpoint rules have not been redesigned. The contact links stay visible during scrolling and retain stable geometry during hover and focus. Dependency versions and the original dependency lockfile are preserved.
 
 The original Vinext/Cloudflare build scripts and scaffolding remain in the archive for reference. They are not used by the new `dev`, `build`, `start` or deployment commands. The Pages deployment artifact contains only `out/`, not the old worker output or source scaffolding.
 
@@ -101,3 +101,5 @@ Dependencies, caches and generated output are intentionally excluded from the ZI
 - [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 
 Converted for GitHub Pages: 3 October 2026.
+
+Latest correction: 3 October 2026 — stabilized the desktop LinkedIn contact link and checked mobile/desktop rendering with normal motion enabled. See `GITHUB-PAGES-VALIDATION.md` for the completed checks.

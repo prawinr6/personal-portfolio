@@ -1,31 +1,55 @@
-# GitHub Pages conversion — validation
+# Portfolio validation — LinkedIn display correction
 
-Checked on 3 October 2026 against the original uploaded source archive.
+Updated and checked on 3 October 2026.
 
-## Build and deployment configuration
+## Changes in this revision
 
-- Production static export and TypeScript checks passed with an empty base path (domain root).
-- Production static export and TypeScript checks passed with `/prawin-portfolio` as a representative repository prefix.
-- The original pnpm lockfile passed a frozen-lockfile check and is unchanged.
-- The GitHub Actions workflow was checked for its build/deploy dependency, Pages permissions, artifact directory and automatic base-path input.
-- The export contains prerendered HTML, CSS, JavaScript, font and image assets, and `.nojekyll`; no application server is required.
+- The email and LinkedIn links no longer participate in the opacity/translation scroll-reveal animation, so their visibility does not depend on an IntersectionObserver callback.
+- The contact block uses explicit grid rows. The LinkedIn link has a non-wrapping label and a fixed-size, centered icon, with stable geometry during hover, keyboard focus and window resizing.
+- The email label can wrap if space is unusually constrained; the copy control retains its size.
+- The profile URL, page content, section order, fonts, portrait, logo, colours and mobile appearance remain unchanged.
 
-## Visual comparison
+The reported desktop instability was not reproduced in the available unmodified Chromium/WebKit baseline checks. This correction removes the contact links' animated-visibility dependency and makes their sizing explicit. The checks below verify the resulting source; they are not a diagnosis of an unobserved live deployment or a physical-device Safari test.
 
-The original Vinext production website was compared with both static builds using full-page Chromium screenshots. Reduced motion was enabled to make captures deterministic.
+## Build
 
-| Viewport | Light theme | Dark theme |
+The production static build and TypeScript checks passed with `/prawin-portfolio` as a representative GitHub Pages repository prefix. GitHub Pages configuration, asset-path support, deployment workflow and dependency lockfile are unchanged from the previously validated conversion.
+
+## Browser and responsive checks
+
+Chromium and WebKit were each tested with normal motion enabled, in light and dark themes, at all six widths below. Viewport height was 900 pixels.
+
+| Viewport width | Chromium light/dark | WebKit light/dark |
 | --- | --- | --- |
-| 1440 × 1000 desktop | Exact pixel match in both builds | Exact pixel match in both builds |
-| 390 × 844 mobile | Exact pixel match in both builds | Exact pixel match in both builds |
-| 375 × 812 mobile | Exact pixel match in both builds | Exact pixel match in both builds |
+| 320 px | Passed | Passed |
+| 390 px | Passed | Passed |
+| 768 px | Passed | Passed |
+| 1001 px | Passed | Passed |
+| 1440 px | Passed | Passed |
+| 1920 px | Passed | Passed |
 
-All 12 before/after comparisons had identical decoded pixel data. No horizontal overflow was detected at these widths.
+All 24 combinations passed checks for:
 
-## Behavior and assets
+- Visibility of every scroll-reveal section after scrolling through the page.
+- All five main sections being present.
+- No horizontal page overflow or overlapping header elements.
+- Loaded images and no failed resource responses or page JavaScript exceptions.
+- The LinkedIn label staying on one line, with correct icon alignment.
+- No LinkedIn bounding-box changes on hover or keyboard focus.
+- Contact links remaining visible before scrolling and after contact-anchor navigation.
 
-Both root and repository-prefix builds passed checks for image and font loading, favicon loading, zero page JavaScript errors or failed resource responses, theme switching and persistence after reload, section navigation, accordion expansion, copying the email address, and the back-to-top link.
+Both engines also passed an uninterrupted window-resize sweep across 30 widths from 320 to 2560 pixels, including both sides of the principal responsive breakpoints: 60 resize checks in total.
 
-The original public assets, UI components, logo component and theme provider are byte-for-byte unchanged. All CSS declarations remain unchanged; only the six font URL references were adjusted. Page changes are limited to prefixing the portrait and LinkedIn icon URLs. Layout changes are limited to prefixing favicon URLs.
+At desktop and phone widths, link-click checks confirmed that LinkedIn opens its configured profile URL in a new tab. That navigation was intercepted locally to verify the destination without relying on LinkedIn's sign-in or network response. Accordion expansion, theme switching and theme persistence after reload also passed. Chromium additionally passed the copy-email clipboard and back-to-top checks.
 
-These are local build and browser checks. The archive includes the GitHub Actions workflow; publishing requires uploading the source to your repository and enabling GitHub Actions as its Pages source, as described in START-HERE.md.
+## Design preservation
+
+Full-page Chromium screenshots at 1440 × 1000, 390 × 844 and 375 × 812, in light and dark themes, matched the original portfolio pixel for pixel: six exact comparisons. Reduced motion was used only for these deterministic screenshot comparisons. The separate responsive and interaction checks above used normal motion.
+
+The original public assets, UI component files, brand component, theme provider and dependency lockfile are unchanged.
+
+## Apply the update
+
+Replace the earlier repository source files with the contents of this ZIP and push to `main`. The included workflow then builds and publishes the update. If necessary, run **Deploy portfolio to GitHub Pages** from the repository's Actions tab. See `START-HERE.md` for first-time setup.
+
+This archive updates the source; it does not itself change a deployed website.

@@ -2,6 +2,8 @@
 
 The portfolio now builds into a static `out/` folder for GitHub Pages. The page content, responsive layout, colours, light/dark themes, typography, portrait and logo are preserved.
 
+This revision stabilizes the LinkedIn contact link while preserving the mobile appearance. If you already uploaded an earlier ZIP, replace its source files with these and push to `main` to deploy the update.
+
 ## Publish with GitHub Actions
 
 1. Extract this ZIP and open `prawin-raj-portfolio`.

@@ -106,12 +106,12 @@ export default function Home() {
           <div className="contact-inner wrap">
             <div className="section-kicker reveal"><span className="index">04</span><span>START A CONVERSATION</span></div>
             <div className="contact-heading reveal"><p>Good things begin with a conversation.</p><h2 id="contact-title">Let’s build<br /><em>confidence.</em></h2></div>
-            <div className="contact-bar reveal">
+            <div className="contact-bar">
               <div className="contact-email-row">
-                <a href="mailto:mail@prawinraj.com" className="email-link"><Mail className="email-symbol" size={29} strokeWidth={1.4} aria-hidden="true" /><span>mail@prawinraj.com</span></a>
+                <a href="mailto:mail@prawinraj.com" className="email-link"><Mail className="email-symbol" size={29} strokeWidth={1.4} aria-hidden="true" /><span className="contact-link-label">mail@prawinraj.com</span></a>
                 <Button variant="outline" className="copy-button" title={copied ? "Email address copied" : "Copy email address"} onClick={copyEmail} aria-label={copied ? "Email address copied" : "Copy email address"}>{copied ? <Check size={17} /> : <Copy size={17} />}<span>{copied ? "Copied" : "Copy email"}</span></Button>
               </div>
-              <a className="linkedin-link" href="https://linkedin.com/in/prawin-raj-ss" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile of Prawin Raj S S (opens in a new tab)"><span className="linkedin-symbol" aria-hidden="true"><img src={assetPath("/icons/linkedin-in.svg")} width="17" height="17" alt="" /></span><span>LinkedIn profile</span></a>
+              <a className="linkedin-link" href="https://linkedin.com/in/prawin-raj-ss" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile of Prawin Raj S S (opens in a new tab)"><span className="linkedin-symbol" aria-hidden="true"><img src={assetPath("/icons/linkedin-in.svg")} width="17" height="17" alt="" /></span><span className="contact-link-label">LinkedIn profile</span></a>
             </div>
             <div className="contact-details reveal"><p><MapPin size={16} aria-hidden="true" /> Based in Bengaluru, India</p></div>
           </div>
